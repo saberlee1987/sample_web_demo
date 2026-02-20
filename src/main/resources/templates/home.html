@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<h3>Home page</h3>
+<th:block th:if="${colors}!=null">
+    <table>
+        <tr>
+            <th>colors</th>
+        </tr>
+        <tr th:each="color:${colors}">
+            <td th:text="${color}"></td>
+        </tr>
+    </table>
+</th:block>
+<br>
+<h3>persons</h3>
+<th:block th:if="${persons}!=null">
+    <table border="2" th:width="500px">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Mobile</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="person:${persons}">
+            <td th:text="${person.getId()}"></td>
+            <td th:text="${person.getFirstname()}"></td>
+            <td th:text="${person.getLastname()}"></td>
+            <td th:text="${person.getAge()}"></td>
+            <td th:text="${person.getEmail()}"></td>
+            <td th:text="${person.getMobile()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+
+<br>
+<a href="/">index page</a>
+</body>
+</html>

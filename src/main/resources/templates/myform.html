@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>my form page</title>
+</head>
+<body>
+<h3>my form page</h3>
+<form th:action="@{/myform/process}" method="post">
+  <label for="firstname">firstname : </label>
+  <input type="text" name="firstname" id="firstname" th:value="${person.firstname}"> <br><br>
+  <label for="lastname">lastname : </label>
+  <input type="text" name="lastname" id="lastname" th:value="${person.lastname}"> <br><br>
+    <label for="age">age : </label>
+    <input type="number" name="age" id="age" th:value="${person.age}"> <br><br>
+  <label for="male">Male</label> : <input type="radio" name="gender" value="male" id="male" th:checked="${person.checkedGender('male')}">
+  <label for="female">FeMale</label> : <input type="radio" name="gender" value="female" id="female" th:checked="${person.checkedGender('female')}"> <br><br>
+    <label for="education">education</label> <select id="education" name="education">
+        <option th:each="education :${person.getEducations()}" th:value="${education.getValue()}"
+        th:text="${education.getTitle()}" th:selected="${person.checkedEducation(education.getValue())}"></option>
+    </select><br/><br/>
+    <label for="email">email : </label>
+    <input type="email" name="email" id="email" th:value="${person.email}"> <br><br>
+
+    <label for="mobile">mobile : </label>
+    <input type="text" name="mobile" id="mobile" th:value="${person.mobile}"> <br><br>
+
+    <label for="address">Address</label>
+    <textarea id="address" rows="7" cols="30" name="address" th:value="${person.address}" th:text="${person.address}"></textarea>
+
+    <br><br>
+  <input type="submit" value="Send data">
+</form>
+</body>
+</html>

@@ -1,0 +1,10 @@
+server:
+    port: 8900
+    servlet:
+        encoding:
+            force: true
+            charset: UTF-8
+
+spring:
+    application:
+        name: sample_web_demo
