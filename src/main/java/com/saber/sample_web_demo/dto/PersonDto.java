@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @AllArgsConstructor
@@ -46,5 +47,17 @@ public class PersonDto {
 
     public List<Constants.EducationEnum> getEducations(){
         return Arrays.stream(Constants.EducationEnum.values()).toList();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonDto personDto = (PersonDto) o;
+        return Objects.equals(id, personDto.id) && Objects.equals(firstname, personDto.firstname) && Objects.equals(lastname, personDto.lastname) && Objects.equals(gender, personDto.gender) && Objects.equals(education, personDto.education) && Objects.equals(address, personDto.address) && Objects.equals(age, personDto.age) && Objects.equals(email, personDto.email) && Objects.equals(mobile, personDto.mobile);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, lastname, gender, education, address, age, email, mobile);
     }
 }

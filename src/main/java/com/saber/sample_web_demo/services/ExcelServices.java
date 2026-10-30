@@ -5,20 +5,23 @@ import com.spire.xls.Workbook;
 import com.spire.xls.Worksheet;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.SneakyThrows;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.DefaultIndexedColorMap;
-import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.apache.poi.xssf.usermodel.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
 import java.util.List;
 import java.util.UUID;
-
+//003365931734
+//
 @Service
 public class ExcelServices {
     public void writeExcel(HttpServletResponse response) {
@@ -157,6 +160,21 @@ public class ExcelServices {
         cellStyle.setLocked(true);
 //        cellStyle.setFont();
         return cellStyle;
+    }
+
+    @SneakyThrows
+    public void uploadExcelFile(MultipartFile multipartFile) {
+
+        XSSFWorkbook xssfWorkbook = new XSSFWorkbook(multipartFile.getInputStream());
+        XSSFSheet sheet = xssfWorkbook.getSheetAt(0);
+
+        for (Row row : sheet) {
+            if (row.getRowNum() == 0) continue;
+            for (int i = 0; i < row.getPhysicalNumberOfCells(); i++) {
+                System.out.println(row.getCell(i).getStringCellValue());
+            }
+            System.out.println("===================================================================");
+        }
     }
 }
 //Protecting the file with password

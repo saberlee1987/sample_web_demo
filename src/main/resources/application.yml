@@ -8,3 +8,17 @@ server:
 spring:
     application:
         name: sample_web_demo
+
+service:
+    api:
+        base-path: /services/${spring.application.name}
+    swagger:
+        title: 'spring boot web demo'
+        description: 'this is sample spring boot application web demo'
+        version : 'version1.1.0-1404/02/23'
+springdoc:
+    swagger-ui:
+        path: /swagger
+        display-request-duration: true
+        display-operation-id: true
+        operations-sorter: alpha
